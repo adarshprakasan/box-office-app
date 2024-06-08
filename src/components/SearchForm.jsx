@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
 import { useSearchStr } from '../lib/useSearchStr';
 import CustomRadio from './CustomRadio';
-import styled from 'styled-components';
 
 const SearchForm = ({ onSearch }) => {
   const [searchStr, setSearchStr] = useSearchStr();
   const [searchOption, setSearchOption] = useState('shows');
-
-  useEffect(() => {
-    console.log('COMPONENT MOUNTS');
-  }, []);
 
   const onSearchInputChange = ev => {
     setSearchStr(ev.target.value);
@@ -26,6 +22,7 @@ const SearchForm = ({ onSearch }) => {
       q: searchStr,
       searchOption
     };
+
     onSearch(options);
   };
 
@@ -33,7 +30,7 @@ const SearchForm = ({ onSearch }) => {
     <form onSubmit={onSubmit}>
       <SearchInput
         type="text"
-        placeholder="Search for something..."
+        placeholder="Search for something"
         value={searchStr}
         onChange={onSearchInputChange}
       />
@@ -62,6 +59,7 @@ const SearchForm = ({ onSearch }) => {
     </form>
   );
 };
+
 export default SearchForm;
 
 const SearchInput = styled.input`

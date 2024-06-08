@@ -5,6 +5,7 @@ const CustomRadio = ({ label, ...inputProps }) => {
     <StyledRadio>
       {label}
       <input {...inputProps} type="radio" />
+      <span />
     </StyledRadio>
   );
 };

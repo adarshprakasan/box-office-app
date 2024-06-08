@@ -1,26 +1,27 @@
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchCard, SearchImgWrapper } from '../common/SearchCard';
 import { StarIcon } from '../common/StarIcon';
-import { useRef } from 'react';
 
 const ShowCard = ({ name, image, id, summary, onStarMeClick, isStarred }) => {
   const summaryStripped = summary
     ? summary.split(' ').slice(0, 10).join(' ').replace(/<.+?>/g, '') + '...'
-    : 'No Description';
+    : 'No description';
 
   const starBtnRef = useRef();
 
   const handleStarClick = () => {
     onStarMeClick(id);
 
-    const starBtnE1 = starBtnRef.current;
+    const starBtnEl = starBtnRef.current;
 
-    if (!starBtnE1) return;
+    if (!starBtnEl) return;
 
     if (isStarred) {
-      starBtnE1.classList.remove('animate');
+      starBtnEl.classList.remove('animate');
     } else {
-      starBtnE1.classList.add('animate');
+      starBtnEl.classList.add('animate');
     }
   };
 
@@ -35,17 +36,11 @@ const ShowCard = ({ name, image, id, summary, onStarMeClick, isStarred }) => {
       <p>{summaryStripped}</p>
 
       <ActionSection>
-        <a href={`/show/${id}`} target="_blank" rel="noreferrer">
-          Read More
-        </a>
-        <StarBtn
-          ref={starBtnRef}
-          type="button"
-          onClick={handleStarClick}
-          className={isStarred && 'animate'}
-        >
+        <Link to={`/show/${id}`} target="_blank" rel="noreferrer">
+          Read more
+        </Link>
+        <StarBtn ref={starBtnRef} type="button" onClick={handleStarClick}>
           <StarIcon active={isStarred} />
-          {/* {isStarred ? 'Unstar Me' : 'Star  Me'} */}
         </StarBtn>
       </ActionSection>
     </SearchCard>
